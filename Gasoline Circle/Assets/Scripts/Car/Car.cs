@@ -2,6 +2,10 @@
 
 public class Car : MonoBehaviour
 {
+
+    [SerializeField]
+    private Transform placeForTrap;
+
     [SerializeField]
     private Transform forwardPoint;
 
