@@ -8,16 +8,11 @@
 public class Settings : ScriptableObject
 {
     /// <summary>
-    /// Громкость аудио
+    /// Количество побед игрока №1
     /// </summary>
-    public float volume = 1f;
-
+    public int PlayerOneWins = 0;
     /// <summary>
-    /// Рекорд игрока №1
+    /// Количество побед игрока №2
     /// </summary>
-    public int PlayerOneHiScore = 0;
-    /// <summary>
-    /// Рекорд игрока №2
-    /// </summary>
-    public int PlayerTwoHiScore = 0;
+    public int PlayerTwoWins = 0;
 }

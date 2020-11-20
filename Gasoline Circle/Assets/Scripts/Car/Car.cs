@@ -9,6 +9,12 @@ public class Car : MonoBehaviour
     private float movementSpeed = 1f;
 
     [SerializeField]
+    private float limitSpeed = 3f;
+
+    [SerializeField]
+    private float coefSlip = 5f;
+
+    [SerializeField]
     private float rotateSpeed = 20f;
 
     [SerializeField]
@@ -17,6 +23,8 @@ public class Car : MonoBehaviour
 
     private Rigidbody2D rigidbody;
     private float currentSpeed = 0f;
+
+    public CarControllMode Mode { get => mode; }
 
     private void Awake()
     {
@@ -31,7 +39,7 @@ public class Car : MonoBehaviour
 
     public void Update()
     {
-        if (mode == CarControllMode.PlayerOne)
+        if (Mode == CarControllMode.PlayerOne)
         {
             GetInputPlayerOne();
         }
@@ -50,7 +58,10 @@ public class Car : MonoBehaviour
 
     private void MoveCar() 
     {
-        transform.position = Vector3.MoveTowards(transform.position, forwardPoint.position, Time.deltaTime * currentSpeed);
+        Vector2 delta = new Vector2(forwardPoint.position.x, forwardPoint.position.y);
+        rigidbody.MovePosition(
+            Vector2.MoveTowards(new Vector2(transform.position.x, transform.position.y), 
+            delta, Time.deltaTime * currentSpeed));
     }
     
 
@@ -60,17 +71,19 @@ public class Car : MonoBehaviour
         if (Input.GetKey(KeyCode.W))
         {
             speed = currentSpeed + movementSpeed * Time.deltaTime;
-            currentSpeed = Mathf.Clamp(speed, -3f, 10f);
+            currentSpeed = Mathf.Clamp(speed, -limitSpeed, limitSpeed);
         }
         else if (Input.GetKey(KeyCode.S))
         {
             //Будущая заготовка к ловушке
+            //капкан, масло, бомба
+            //Возможно за очки
         }
         else
         {
             if (currentSpeed > 0)
             {
-                currentSpeed -= movementSpeed * Time.deltaTime;
+                currentSpeed -= coefSlip * movementSpeed * Time.deltaTime;
             }
             else
             {
@@ -86,7 +99,7 @@ public class Car : MonoBehaviour
         if (Input.GetKey(KeyCode.UpArrow))
         {
             speed = currentSpeed + movementSpeed * Time.deltaTime;
-            currentSpeed = Mathf.Clamp(speed, -3f, 2f);
+            currentSpeed = Mathf.Clamp(speed, -limitSpeed, limitSpeed);
         }
         else if (Input.GetKey(KeyCode.DownArrow))
         {
@@ -96,7 +109,7 @@ public class Car : MonoBehaviour
         {
             if (currentSpeed > 0)
             {
-                currentSpeed -= 5f * movementSpeed * Time.deltaTime;
+                currentSpeed -= coefSlip * movementSpeed * Time.deltaTime;
             }
             else
             {
@@ -109,7 +122,7 @@ public class Car : MonoBehaviour
     {
         float rotate = 0;
 
-        if (mode == CarControllMode.PlayerOne)
+        if (Mode == CarControllMode.PlayerOne)
         {
             if (Input.GetKey(KeyCode.A))
                 rotate = rotateSpeed * Time.deltaTime;
@@ -123,8 +136,9 @@ public class Car : MonoBehaviour
             else if (Input.GetKey(KeyCode.RightArrow))
                 rotate = rotateSpeed * Time.deltaTime * -1f;
         }
-
-        transform.Rotate(new Vector3(0, 0, rotate), Space.Self);
+        Quaternion rotateAngle = Quaternion.Euler(0, 0, rotate);
+        Quaternion currentAngle = transform.rotation * rotateAngle;
+        rigidbody.MoveRotation(currentAngle);
     }
 
 
