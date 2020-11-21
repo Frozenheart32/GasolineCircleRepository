@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Car : MonoBehaviour
 {
@@ -30,6 +31,7 @@ public class Car : MonoBehaviour
 
     public CarControllMode Mode { get => mode; }
 
+
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();            
@@ -43,14 +45,16 @@ public class Car : MonoBehaviour
 
     public void Update()
     {
+        
         if (Mode == CarControllMode.PlayerOne)
         {
             GetInputPlayerOne();
         }
-        else 
+        else
         {
             GetInputPlayerTwo();
         }
+          
     }
 
     private void FixedUpdate()
@@ -59,6 +63,21 @@ public class Car : MonoBehaviour
         RotateCar();
     }
 
+
+    private void CreateTrash() 
+    {
+        int index = Random.Range(0, 100);
+
+        if (index > 50)
+            OilStain.CreateOilStain(placeForTrap);
+        else
+            Trash.CreateTrash(placeForTrap);
+
+        if (Mode == CarControllMode.PlayerOne)
+            GameController.Instance.DecreaseThePlayerPoint(CarControllMode.PlayerOne);
+        else
+            GameController.Instance.DecreaseThePlayerPoint(CarControllMode.PlayerTwo);
+    }
 
     private void MoveCar() 
     {
@@ -77,12 +96,6 @@ public class Car : MonoBehaviour
             speed = currentSpeed + movementSpeed * Time.deltaTime;
             currentSpeed = Mathf.Clamp(speed, -limitSpeed, limitSpeed);
         }
-        else if (Input.GetKey(KeyCode.S))
-        {
-            //Будущая заготовка к ловушке
-            //капкан, масло, бомба
-            //Возможно за очки
-        }
         else
         {
             if (currentSpeed > 0)
@@ -93,6 +106,12 @@ public class Car : MonoBehaviour
             {
                 currentSpeed = 0;
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.S)) 
+        {
+            if (GameController.Instance.PointsOne > 0)
+                CreateTrash();
         }
     }
 
@@ -105,10 +124,6 @@ public class Car : MonoBehaviour
             speed = currentSpeed + movementSpeed * Time.deltaTime;
             currentSpeed = Mathf.Clamp(speed, -limitSpeed, limitSpeed);
         }
-        else if (Input.GetKey(KeyCode.DownArrow))
-        {
-            //
-        }
         else
         {
             if (currentSpeed > 0)
@@ -119,6 +134,12 @@ public class Car : MonoBehaviour
             {
                 currentSpeed = 0;
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            if (GameController.Instance.PointsOne > 0)
+                CreateTrash();
         }
     }
 
@@ -144,6 +165,27 @@ public class Car : MonoBehaviour
         Quaternion currentAngle = transform.rotation * rotateAngle;
         rigidbody.MoveRotation(currentAngle);
     }
+
+    public void HitOnOilStain() 
+    {
+        StartCoroutine(OiledCar());
+    }
+
+
+    private IEnumerator OiledCar() 
+    {
+        float myRotateSpeed = rotateSpeed;
+        rotateSpeed = 400f;
+        currentSpeed /= 2;
+        yield return new WaitForSeconds(3f);
+        rotateSpeed = myRotateSpeed;
+    }
+
+    public void HitOnTrash() 
+    {
+        currentSpeed = 0f;
+    }
+
 
 
     private void OnCollisionEnter2D(Collision2D collision)

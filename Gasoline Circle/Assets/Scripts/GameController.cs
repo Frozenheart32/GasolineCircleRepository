@@ -78,6 +78,19 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void DecreaseThePlayerPoint(CarControllMode mode) 
+    {
+        switch (mode)
+        {
+            case CarControllMode.PlayerOne:
+                PointsOne--;
+                break;
+            case CarControllMode.PlayerTwo:
+                PointsTwo--;
+                break;
+        }
+    }
+
     public void IncreaseThePlayerPoint(CarControllMode mode) 
     {
         switch (mode) 
