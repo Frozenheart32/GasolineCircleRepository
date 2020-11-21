@@ -6,12 +6,18 @@
 /// </summary>
 public class Trash : Trap
 {
+
+    private void Start()
+    {
+        AudioController.Instance.PlaySound("TrashOn_s");
+    }
+
     public override void Interact(Car car)
     {
         base.Interact(car);
         car.HitOnTrash();
         //Звук разбрасывания мусора и вможно VFX
-
+        AudioController.Instance.PlaySound("TrashOff_s");
         Destroy(gameObject);
     }
 

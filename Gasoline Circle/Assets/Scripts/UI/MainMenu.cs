@@ -7,6 +7,13 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class MainMenu : MonoBehaviour
 {
+
+    private void Start()
+    {
+        AudioController.Instance.PlayMusic("Menu_m");
+    }
+
+
     /// <summary>
     /// Запускает 1-ый уровень
     /// </summary>

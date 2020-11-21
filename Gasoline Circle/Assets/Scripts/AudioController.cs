@@ -79,6 +79,8 @@ public class AudioController : MonoBehaviour
     /// <param name="clipName">Имя звука</param>
     public void PlaySound(string clipName)
     {
+        if (soundSource.isPlaying)
+            soundSource.Stop();
         soundSource.PlayOneShot(GetSound(clipName));
     }
 
@@ -93,7 +95,7 @@ public class AudioController : MonoBehaviour
     {
         for (int i = 0; i < musics.Length; i++)
         {
-            if (sounds[i].name == clipName)
+            if (musics[i].name == clipName)
             {
                 return musics[i];
             }
@@ -109,6 +111,8 @@ public class AudioController : MonoBehaviour
     /// <param name="clipName">Имя музыки</param>
     public void PlayMusic(string clipName)
     {
+        if (musicSource.isPlaying)
+            musicSource.Stop();
         musicSource.PlayOneShot(GetMusic(clipName));
     }
 

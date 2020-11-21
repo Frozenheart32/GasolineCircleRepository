@@ -27,14 +27,17 @@ public class Car : MonoBehaviour
 
 
     private Rigidbody2D rigidbody;
+    [SerializeField]
     private float currentSpeed = 0f;
+    private AudioSource audioSource;
 
     public CarControllMode Mode { get => mode; }
 
 
     private void Awake()
     {
-        rigidbody = GetComponent<Rigidbody2D>();            
+        rigidbody = gameObject.GetComponent<Rigidbody2D>();
+        audioSource = gameObject.GetComponent<AudioSource>();
     }
 
     // Start is called before the first frame update
@@ -61,6 +64,7 @@ public class Car : MonoBehaviour
     {
         MoveCar();
         RotateCar();
+        CheckSoundCar();
     }
 
 
@@ -187,6 +191,19 @@ public class Car : MonoBehaviour
     }
 
 
+    private void CheckSoundCar()
+    {
+        if (currentSpeed <= 1.5f)
+        {
+            audioSource.volume = 0.3f;
+            audioSource.pitch = 1f;
+        }
+        else
+        {
+            audioSource.volume = 0.6f;
+            audioSource.pitch = 1.3f;
+        }
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -194,6 +211,10 @@ public class Car : MonoBehaviour
         if (interactableObj != null)
         {
             interactableObj.Interact(this);
+        }
+        else
+        {
+            AudioController.Instance.PlaySound("HitCar_s");
         }
     }
 }

@@ -8,6 +8,7 @@ public class OilStain : Trap
     private void Start()
     {
         boxCollider = gameObject.GetComponent<BoxCollider2D>();
+        AudioController.Instance.PlaySound("OilOn_s");
         StartCoroutine(OilModeOn());
     }
 
@@ -25,6 +26,7 @@ public class OilStain : Trap
 
 
         car.HitOnOilStain();
+        AudioController.Instance.PlaySound("OilOff_s");
         Destroy(gameObject);
     }
 
@@ -32,6 +34,5 @@ public class OilStain : Trap
     public static void CreateOilStain(Transform placeForTrap)
     {
         Instantiate(Resources.Load("Prefabs/InteractiveObjects/OilStain"), placeForTrap.position, placeForTrap.rotation);
-        //Звук создания ловуки
     }
 }

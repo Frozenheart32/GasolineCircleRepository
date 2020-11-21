@@ -39,7 +39,7 @@ public class GameController : MonoBehaviour
         {
             pointsOne = value;
             if (pointsOne < 0)
-                WinForDestroy(2);
+                WinForDestroy(1);
             else
                 HUD.Instance.SetScore(1, pointsOne);
 
@@ -77,6 +77,15 @@ public class GameController : MonoBehaviour
             instance = this;
         }
     }
+
+
+    private void Start()
+    {
+        string nameClip = string.Format("{0}level_m", SceneManager.GetActiveScene().buildIndex);
+        AudioController.Instance.PlayMusic(nameClip);
+    }
+
+
 
     public void DecreaseThePlayerPoint(CarControllMode mode) 
     {
