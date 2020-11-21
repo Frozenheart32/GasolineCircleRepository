@@ -22,13 +22,10 @@ public class CheckPoint : MonoBehaviour
     private CheckPointController owner;
 
 
-    private void Start()
-    {
-        owner = transform.GetComponentInParent<CheckPointController>();
-    }
-
-
-
+    /// <summary>
+    /// Срабатывает при вхождении игрока в зону чекпоинта
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Car car = collision.GetComponent<Car>();

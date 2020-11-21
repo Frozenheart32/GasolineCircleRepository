@@ -38,6 +38,11 @@ public class GameController : MonoBehaviour
         set
         {
             pointsOne = value;
+            if (pointsOne < 0)
+                WinForDestroy(2);
+            else
+                HUD.Instance.SetScore(1, pointsOne);
+
             if (pointsOne >= 10)
                 WinForPoints(1);
         }
@@ -52,8 +57,14 @@ public class GameController : MonoBehaviour
         set 
         {
             pointsTwo = value;
+            if (pointsTwo < 0)
+                WinForDestroy(2);
+            else
+                HUD.Instance.SetScore(2, pointsTwo);
+
             if (pointsTwo >= 10)
                 WinForPoints(2);
+            
         }
     }
 
@@ -86,15 +97,30 @@ public class GameController : MonoBehaviour
         switch (indexCar) 
         {
             case (1):
+                HUD.Instance.ShowWinMenu("Поздравляем с победой по очкам игрока №1!");
+                Settings.PlayerOneWins++;
                 break;
             case (2):
+                HUD.Instance.ShowWinMenu("Поздравляем с победой по очкам игрока №2!");
+                Settings.PlayerTwoWins++;
                 break;
         }
     }
 
-    public void WinForDestroy() 
+    public void WinForDestroy(int destroedCarIndex) 
     {
-        //Вызов окна с победой с уничтожением машины противника
+        switch (destroedCarIndex) 
+        {
+            case (1):
+                HUD.Instance.ShowWinMenu("Машина игрока №1 сломалась. Игрок №2 одержал победу");
+                Settings.PlayerTwoWins++;
+                break;
+            case (2):
+                HUD.Instance.ShowWinMenu("Машина игрока №2 сломалась. Игрок №1 одержал победу");
+                Settings.PlayerOneWins++;
+                break;
+        }
+
     }
 
     public void LoadNextLevel() 

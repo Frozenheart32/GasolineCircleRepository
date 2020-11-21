@@ -21,6 +21,9 @@ public class HUD : MonoBehaviour
     private Text playerTwoWinsText;
 
     [SerializeField]
+    private GameObject startPanel;
+
+    [SerializeField]
     private GameObject winWindow;
 
     [SerializeField]
@@ -43,6 +46,7 @@ public class HUD : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ShowStartPanel();
         FillData();
     }
 
@@ -54,12 +58,26 @@ public class HUD : MonoBehaviour
         }
     }
 
+
     private void FillData() 
     {
         playerOneScoreText.text = "0";
         playerTwoScoreText.text = "0";
         playerOneWinsText.text = GameController.Instance.Settings.PlayerOneWins.ToString();
         playerTwoWinsText.text = GameController.Instance.Settings.PlayerTwoWins.ToString();
+    }
+
+
+    public void SetScore(int numberOfPlayer, int score) 
+    {
+        if (numberOfPlayer == 1)
+        {
+            playerOneScoreText.text = score.ToString();
+        }
+        else if (numberOfPlayer == 2) 
+        {
+            playerTwoScoreText.text = score.ToString();
+        }
     }
 
 
@@ -97,6 +115,12 @@ public class HUD : MonoBehaviour
             AudioListener.volume = 0f;
         else
             AudioListener.volume = 1f;
+    }
+
+
+    public void ShowStartPanel() 
+    {
+        ShowWindow(startPanel);
     }
 
     public void NextBtn() 
