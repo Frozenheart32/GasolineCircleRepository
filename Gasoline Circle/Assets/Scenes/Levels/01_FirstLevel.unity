@@ -1133,7 +1133,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_Sprite: {fileID: -5210371261783028467, guid: e38a9b8e2be997d41b07dda1abcd3cf3,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1657,7 +1657,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 4
   m_Sprite: {fileID: 5028700081585005693, guid: e38a9b8e2be997d41b07dda1abcd3cf3,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2306,7 +2306,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 4
   m_Sprite: {fileID: 2144703339564201536, guid: e38a9b8e2be997d41b07dda1abcd3cf3,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -4170,7 +4170,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_Sprite: {fileID: 5028700081585005693, guid: e38a9b8e2be997d41b07dda1abcd3cf3,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -4358,7 +4358,7 @@ GameObject:
   - component: {fileID: 1194969059}
   - component: {fileID: 1194969060}
   m_Layer: 0
-  m_Name: Grass
+  m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6508,7 +6508,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_Sprite: {fileID: -5210371261783028467, guid: e38a9b8e2be997d41b07dda1abcd3cf3,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -7160,7 +7160,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7907624798752920827, guid: a785b7c8dc0c9254ba1df38f3c1a445f,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -7522,7 +7522,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 4
   m_Sprite: {fileID: 4652611624145368456, guid: e38a9b8e2be997d41b07dda1abcd3cf3,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

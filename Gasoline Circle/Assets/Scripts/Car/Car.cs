@@ -43,7 +43,7 @@ public class Car : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.visible = false;
+        //Cursor.visible = false;
     }
 
     public void Update()

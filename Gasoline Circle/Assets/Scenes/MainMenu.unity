@@ -296,11 +296,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2138106797}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1460, y: -200}
+  m_AnchoredPosition: {x: 960, y: -200}
   m_SizeDelta: {x: 350, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &194291796
@@ -363,7 +363,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -966,10 +966,10 @@ MonoBehaviour:
 
     UP - move forward;
 
-    DOWN - set trap;
+    DOWN - set trap (points
+    pay);
 
-    LEFT
-    - rotate car to left;
+    LEFT - rotate car to left;
 
     RIGHT - rotate car to right;'
 --- !u!222 &338830923
@@ -1353,10 +1353,10 @@ MonoBehaviour:
 
     W - move forward;
 
-    S - set trap;
+    S - set trap; (points
+    pay)
 
-    A
-    - rotate car to left;
+    A - rotate car to left;
 
     D - rotate car to right;'
 --- !u!222 &592414615
@@ -2372,11 +2372,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2138106797}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 960, y: -200}
+  m_AnchoredPosition: {x: 1460, y: -200}
   m_SizeDelta: {x: 350, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1768322531
@@ -2439,7 +2439,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -2831,8 +2831,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 633237110}
-  - {fileID: 1768322530}
   - {fileID: 194291795}
+  - {fileID: 1768322530}
   m_Father: {fileID: 379130672}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
