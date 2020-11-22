@@ -113,7 +113,8 @@ public class AudioController : MonoBehaviour
     {
         if (musicSource.isPlaying)
             musicSource.Stop();
-        musicSource.PlayOneShot(GetMusic(clipName));
+        musicSource.clip = GetMusic(clipName);
+        musicSource.Play();
     }
 
 

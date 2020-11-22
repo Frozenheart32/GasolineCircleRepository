@@ -45,7 +45,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.7
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -241,6 +241,7 @@ MonoBehaviour:
   musics:
   - {fileID: 8300000, guid: f382c50b7a3b5df4f8c2b6c0b6f93665, type: 3}
   - {fileID: 8300000, guid: 36c5ed29d5728d54583b92455a59de29, type: 3}
+  - {fileID: 8300000, guid: 8162f4ddad10ac948a47c36ba4366471, type: 3}
   defaultMusic: {fileID: 8300000, guid: 88dbae3fd0bac454b828359273d18498, type: 3}
   soundSource: {fileID: 1003965254209791375}
   sounds:

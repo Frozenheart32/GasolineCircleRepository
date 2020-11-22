@@ -22,6 +22,11 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
+    public void SelectLevel(int numberLevel) 
+    {
+        SceneManager.LoadScene(numberLevel);
+    }
+
     /// <summary>
     /// Выход из игры
     /// </summary>
