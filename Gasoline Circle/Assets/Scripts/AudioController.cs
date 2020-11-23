@@ -46,6 +46,9 @@ public class AudioController : MonoBehaviour
     [SerializeField]
     private AudioClip defaultSound;
 
+    /// <summary>
+    /// Свойство предоставляющее доступ к экземпляру AudioController
+    /// </summary>
     public static AudioController Instance { get => instance; }
 
     private void Awake()

@@ -7,6 +7,10 @@
 /// </summary>
 public abstract class Trap : MonoBehaviour, IInteractable
 {
+    /// <summary>
+    /// Взаимдействие, вызываемое в авто
+    /// </summary>
+    /// <param name="car"></param>
     public virtual void Interact(Car car)
     {
         if (car.Mode == CarControllMode.PlayerOne)

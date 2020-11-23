@@ -1,26 +1,45 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Класс, отвечающий за игровой процесс (проверки условий победы)
+/// </summary>
 public class GameController : MonoBehaviour
 {
+    /// <summary>
+    /// Поле, в котором хранится экземпляр GameController
+    /// </summary>
     private static GameController instance;
 
+    /// <summary>
+    /// Необходимое число очков для победы
+    /// </summary>
     [SerializeField]
     private int winScore = 10;
 
-
+    /// <summary>
+    /// ScriptableObject, хранящий в себе счетчик побед
+    /// для 2х игроков
+    /// </summary>
     [SerializeField]
     private Settings settings;
 
+    /// <summary>
+    /// Текущие очки для игрока №1
+    /// </summary>
     private int pointsOne = 0;
+    /// <summary>
+    /// Текущией очки для игрока №2
+    /// </summary>
     private int pointsTwo = 0;
 
     
 
 
-
+    /// <summary>
+    /// Предсотавляет доступ из любого места кода
+    /// к экземпляру GameController
+    /// </summary>
     public static GameController Instance 
     {
         get 
@@ -29,13 +48,17 @@ public class GameController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Свойство предоставляющее во вне значение
+    /// количества очков игрока №1.
+    /// </summary>
     public int PointsOne
     {
         get
         {
             return pointsOne;
         }
-        set
+        private set
         {
             pointsOne = value;
             if (pointsOne < 0)
@@ -48,13 +71,18 @@ public class GameController : MonoBehaviour
         }
     }
 
+
+    /// <summary>
+    /// Свойство предоставляющее во вне значение
+    /// количества очков игрока №2.
+    /// </summary>
     public int PointsTwo 
     {
         get 
         {
             return pointsTwo;
         }
-        set 
+        private set 
         {
             pointsTwo = value;
             if (pointsTwo < 0)
@@ -68,11 +96,14 @@ public class GameController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Свойство редоставляет доступ к счетчику побед
+    /// </summary>
     public Settings Settings { get => settings; }
 
     private void Awake()
     {
-        if (ReferenceEquals(Instance, null)) 
+        if (ReferenceEquals(instance, null)) 
         {
             instance = this;
         }
@@ -81,12 +112,16 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
+        //Начать воспроизведение музыки на уровне
         string nameClip = string.Format("{0}level_m", SceneManager.GetActiveScene().buildIndex);
         AudioController.Instance.PlayMusic(nameClip);
     }
 
 
-
+    /// <summary>
+    /// Уменьшение очков на 1 у выбранного игрока
+    /// </summary>
+    /// <param name="mode"></param>
     public void DecreaseThePlayerPoint(CarControllMode mode) 
     {
         switch (mode)
@@ -100,6 +135,10 @@ public class GameController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Увеличение очков у выбранного игрока
+    /// </summary>
+    /// <param name="mode"></param>
     public void IncreaseThePlayerPoint(CarControllMode mode) 
     {
         switch (mode) 
@@ -113,7 +152,11 @@ public class GameController : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Логика победы по очкам. Вызывает окно победы 
+    /// с соответствующим сообщением и прибавляет +1 к счетчику побед
+    /// </summary>
+    /// <param name="indexCar">Номер игрока</param>
     private void WinForPoints(int indexCar) 
     {
         switch (indexCar) 
@@ -129,6 +172,12 @@ public class GameController : MonoBehaviour
         }
     }
 
+
+    /// <summary>
+    /// Логика победы за уничтожение противника. Вызывает окно победы 
+    /// с соответствующим сообщением и прибавляет +1 к счетчику побед
+    /// </summary>
+    /// <param name="destroedCarIndex">Номер уничтоженного игрока</param>
     public void WinForDestroy(int destroedCarIndex) 
     {
         switch (destroedCarIndex) 
@@ -145,6 +194,9 @@ public class GameController : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Метод для загрузки следующего уровня
+    /// </summary>
     public void LoadNextLevel() 
     {
         int index = SceneManager.GetActiveScene().buildIndex;
@@ -154,23 +206,34 @@ public class GameController : MonoBehaviour
             SceneManager.LoadScene(1);
     }
 
-
+    /// <summary>
+    /// Перезапуск уровня
+    /// </summary>
     public void RestartGame() 
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-
+    /// <summary>
+    /// Выход в главно меню
+    /// </summary>
     public void ExitToMainMenu() 
     {
         SceneManager.LoadScene(0);
     }
 
+    /// <summary>
+    /// Выход из игры
+    /// </summary>
     public void QuitGame() 
     {
         Application.Quit();
     }
 
+
+    /// <summary>
+    /// Освобождает ресуры при смене уровня
+    /// </summary>
     private void OnDestroy()
     {
         instance = null;

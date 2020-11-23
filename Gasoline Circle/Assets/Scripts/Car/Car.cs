@@ -1,36 +1,66 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// Класс отвечающий за управление авто
+/// </summary>
 public class Car : MonoBehaviour
 {
-
+    /// <summary>
+    /// Место появление ловушек
+    /// </summary>
     [SerializeField]
     private Transform placeForTrap;
 
+    /// <summary>
+    /// Вспомогательная точка следования авто
+    /// </summary>
     [SerializeField]
     private Transform forwardPoint;
-
+    /// <summary>
+    /// скорость наращивания текущей скорости (ускорение)
+    /// </summary>
     [SerializeField]
     private float movementSpeed = 1f;
-
+    /// <summary>
+    /// Ограничение скорости
+    /// </summary>
     [SerializeField]
     private float limitSpeed = 3f;
-
+    /// <summary>
+    /// Коэффициент скольжения
+    /// </summary>
     [SerializeField]
     private float coefSlip = 5f;
-
+    /// <summary>
+    /// Скорость вращения
+    /// </summary>
     [SerializeField]
     private float rotateSpeed = 20f;
-
+    /// <summary>
+    /// Кто управляет машиной
+    /// </summary>
     [SerializeField]
     private CarControllMode mode;
 
-
+    /// <summary>
+    /// Компонент физики авто
+    /// </summary>
     private Rigidbody2D rigidbody;
+    /// <summary>
+    /// Текущая скорость авто
+    /// </summary>
     [SerializeField]
     private float currentSpeed = 0f;
+    /// <summary>
+    /// Источник звука двигателя
+    /// </summary>
     private AudioSource audioSource;
 
+    /// <summary>
+    /// Свойство предоставляет доступ к информации
+    /// о том кто управляет авто
+    /// </summary>
     public CarControllMode Mode { get => mode; }
 
 
@@ -40,15 +70,10 @@ public class Car : MonoBehaviour
         audioSource = gameObject.GetComponent<AudioSource>();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        //Cursor.visible = false;
-    }
-
     public void Update()
     {
-        
+        //В зависимости от того кто управляет 
+        //вызывает соответствующие проверки ввода
         if (Mode == CarControllMode.PlayerOne)
         {
             GetInputPlayerOne();
@@ -67,7 +92,9 @@ public class Car : MonoBehaviour
         CheckSoundCar();
     }
 
-
+    /// <summary>
+    /// Создание ловушки. Либо мусор, либо масло
+    /// </summary>
     private void CreateTrash() 
     {
         int index = Random.Range(0, 100);
@@ -83,6 +110,9 @@ public class Car : MonoBehaviour
             GameController.Instance.DecreaseThePlayerPoint(CarControllMode.PlayerTwo);
     }
 
+    /// <summary>
+    /// Просчет перемещения машины.
+    /// </summary>
     private void MoveCar() 
     {
         Vector2 delta = new Vector2(forwardPoint.position.x, forwardPoint.position.y);
@@ -91,7 +121,9 @@ public class Car : MonoBehaviour
             delta, Time.deltaTime * currentSpeed));
     }
     
-
+    /// <summary>
+    /// Проверка ввода игрока №1
+    /// </summary>
     private void GetInputPlayerOne() 
     {
         float speed = 0f;
@@ -119,7 +151,9 @@ public class Car : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Проверка ввода игрока №2
+    /// </summary>
     private void GetInputPlayerTwo()
     {
         float speed = 0f;
@@ -147,6 +181,9 @@ public class Car : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Просчитывает поворот авто
+    /// </summary>
     private void RotateCar()
     {
         float rotate = 0;
@@ -170,12 +207,19 @@ public class Car : MonoBehaviour
         rigidbody.MoveRotation(currentAngle);
     }
 
+    /// <summary>
+    /// Попадание в масло.
+    /// </summary>
     public void HitOnOilStain() 
     {
         StartCoroutine(OiledCar());
     }
 
-
+    /// <summary>
+    /// Изменениние характеристик
+    /// из-за попадания в масло
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator OiledCar() 
     {
         float myRotateSpeed = rotateSpeed;
@@ -185,12 +229,19 @@ public class Car : MonoBehaviour
         rotateSpeed = myRotateSpeed;
     }
 
+    /// <summary>
+    /// Попадание в мусор 
+    /// и снижение скорости авто до 0
+    /// </summary>
     public void HitOnTrash() 
     {
         currentSpeed = 0f;
     }
 
-
+    /// <summary>
+    /// Устанавливает тон и 
+    /// грокость звука авто от скорости
+    /// </summary>
     private void CheckSoundCar()
     {
         if (currentSpeed <= 1.5f)
@@ -205,6 +256,11 @@ public class Car : MonoBehaviour
         }
     }
 
+
+    /// <summary>
+    /// Реакция на столкновения
+    /// </summary>
+    /// <param name="collision">то с чем столкнулись</param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
         IInteractable interactableObj = collision.gameObject.GetComponent<IInteractable>();

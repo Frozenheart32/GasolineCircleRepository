@@ -22,6 +22,10 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
+    /// <summary>
+    /// ВЫзывает нужный уровень
+    /// </summary>
+    /// <param name="numberLevel">номер уровня</param>
     public void SelectLevel(int numberLevel) 
     {
         SceneManager.LoadScene(numberLevel);
